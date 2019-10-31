@@ -67,7 +67,7 @@
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>
-      npm run build
+      npm run serve
     </PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

@@ -27,6 +27,16 @@
     created() {
       const q = { limit: this.PageSize[0], offset: 0, sort: [], filter: [], ...this.Query }
       Object.keys(q).forEach(key => { this.$set(this.Query, key, q[key]) })
-    }
+    }, 
+    watch: {
+      Query : {
+        handler() {
+          if (!this.IsServerSide) {
+            console.log("ClientSideEvents");
+          } 
+        },
+        deep: true
+      },
+    },
   }
 </script>

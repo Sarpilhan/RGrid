@@ -1,12 +1,14 @@
 ﻿<template>
   <div class="home">
     {{msg}}
-    <RGrid :Columns="DeviceColumns" :Summary="DeviceSummary" :Dataset="TableData" :TableClass="TableClass" :IsResponsive="IsResponsive" :Query="Query" :Total="Total" :PageSize="PageSize"></RGrid>
+    <RGrid :Columns="productColumns" :Summary="productSummary" :Dataset="productData" :TableClass="TableClass" :IsResponsive="IsResponsive" :Query="Query" :Total="Total" :PageSize="PageSize" :IsServerSide="IsServerSide"></RGrid>
     {{ Query }} 
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'Home',
     props: {
@@ -14,25 +16,66 @@
     },
     data() {
       return {
-        DeviceColumns: [
-          { title: "BErkan", field: "id", sortable: true, visible: true, filter:"DateFilter", style:"text-align:center;"}, 
-          { title: "Name", field: "Name", sortable: true, visible: true, filter:"StringFilter" }
+        productColumns: [
+          { title: "ID", field: "Id", sortable: true, visible: false },
+          { title: "Category Id", field: "CategoryId", visible: false },
+          { title: "Product Name", field: "Name", sortable: true, visible: true },
+          { title: "Sales Price", field: "SalesPrice", visible: true,  filter: "DateFilter", },
+          { title: "Purchase Price", field: "PurchasePricese", visible: false },
+          { title: "Producer", field: "Producer", visible: false },
+          { title: "Photo", field: "Photo", sortable: true, visible: false },
+          { title: "Vendor Id", field: "VendorId", visible: false },
+          { title: "Nutrition Facts", field: "NutritionFacts", visible: false },
+          { title: "Description", field: "Description", visible: false },
+          { title: "Tax Rate", field: "TaxRate", visible: false },
+          { title: "Shelf Life", field: "ShelfLife", visible: true },
+          { title: "Status", field: "IsActive", visible: true, tdComp: "ActiveDisplay", filter: "BoolenFilter" },
+          { title: "Operation", tdComp: "operation", buttons: ["delete","edit", "epc"] }
         ],
-        DeviceSummary: { Name: "Total"  } ,
-        TableData: [{ id: 1, Name: "Selam" }, { id: 2, Name: "Selam2" }, { id: 3, Name: "Selam3" }, { id: 4, Name: "Selam4" } ],
+        productSummary: { Name: "Total"  } ,
+        productData: [],
         TableClass: "table-striped table-bordered table-sm",
-        Total: 40,
+        Total: 0,
         PageSize : [10, 20, 30, 40],
         IsResponsive: "table-responsive",
         IsServerSide: false,
         Query: {}, 
 
       };
+    },
+    
+    watch: {
+      Query : {
+        handler() {
+          this.getTableData();
+        },
+        deep: true
+      },
+    },
+    created() {
+      
+      axios.defaults.baseURL = "http://localhost/Smartreat.Api/Api";
+      this.getTableData();
+    },
+    methods: {
+      getTableData() {
+        this.isLoading = true;
+        axios.post("Account/GetList/GetList",  this.Query).then(response => {
+          this.productData = response.data.ItemList;
+          this.Total = response.data.Count;
+        }).catch(error => {
+          this.$Notice.warning({ title: "Warning", desc: error.message });
+        }).then(() => {
+          this.isLoading = false;
+        });
+      },
     }
+
+    
   };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 </style>
 

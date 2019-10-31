@@ -6,19 +6,16 @@
     <div class="dropdown-menu" style="position:relative; width:123px; padding:2px; border:2px solid gray; min-width:123px;">
       <button type="button" class="close" style="position:absolute; right:-10px; top:-15px;" @click="closeToogle"><span aria-hidden="true">&times;</span></button>
 
-      <div class="btn-group"  role="group">
-         
-          <button type="button" :class="['btn btn-secondary', { 'active': keyword == 'true'}]" @click="CheckChange('true')"><i class="far fa-check-square"></i></button>
-          <button type="button" :class="['btn btn-secondary', { 'active': keyword == ''}]" @click="CheckChange('')"><i class="far fa-square"></i></button>
-          <button type="button" :class="['btn btn-secondary', { 'active': keyword == 'false'}]" @click="CheckChange('false')"><i class="fas fa-times"></i></button> 
+      <div class="btn-group" role="group">
+
+        <button type="button" :class="['btn btn-secondary', { 'active': keyword == 'true'}]" @click="CheckChange('true')"><i class="far fa-check-square"></i></button>
+        <button type="button" :class="['btn btn-secondary', { 'active': keyword == ''}]" @click="CheckChange('')"><i class="far fa-square"></i></button>
+        <button type="button" :class="['btn btn-secondary', { 'active': keyword == 'false'}]" @click="CheckChange('false')"><i class="fas fa-times"></i></button>
       </div>
-
-
     </div>
   </div>
 </template>
 <script>
-import $ from 'jquery'
   import props from '../../Utils/PropsMixin'
   export default {
     name: "BoolenFilter",
@@ -32,28 +29,25 @@ import $ from 'jquery'
     }),
     mounted() {
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
-    }, 
+    },
     methods: {
       search() {
-        const { Query, field } = this 
-        var ItemIndex = Query.filter.map(x => x.field).indexOf(field);
-        if (ItemIndex >= 0) {
-          this.closeToogle();
-          if (this.keyword === '') { Query.filter.splice(ItemIndex, 1); return; }
-          Query.filter.splice(ItemIndex, 1);
-          Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword })
-        }
-        else { Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) }
-
+        const { Query, field } = this
         Query.offset = 0
         this.closeToogle();
+        var ItemIndex = Query.filter.map(x => x.field).indexOf(field); 
+        if (ItemIndex >= 0) {
+          Query.filter.splice(ItemIndex, 1); 
+          if (this.keyword === '') {  return; } 
+        }
+        Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword })
       },
       closeToogle() {
         this.CanClose = true;
         $(this.$el.children[0]).dropdown('hide');
         this.CanClose = false;
       },
-      CheckChange(state) { 
+      CheckChange(state) {
         this.keyword = state;
         this.search();
       }

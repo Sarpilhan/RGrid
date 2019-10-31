@@ -66,17 +66,14 @@
     methods: {
       search() {
         const { Query, field } = this
-        var ItemIndex = Query.filter.map(x => x.field).indexOf(field);
-        if (ItemIndex >= 0) {
-          this.closeToogle();
-          if (this.keyword === '') { Query.filter.splice(ItemIndex, 1); return; }
-          Query.filter.splice(ItemIndex, 1); 
-          Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword })
-        }
-        else { Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) }
-
         Query.offset = 0
         this.closeToogle();
+        var ItemIndex = Query.filter.map(x => x.field).indexOf(field); 
+        if (ItemIndex >= 0) {
+          Query.filter.splice(ItemIndex, 1); 
+          if (this.keyword === '') {  return; } 
+        }
+        Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) 
       },
       searchTag() {
         console.log(this.tagList);

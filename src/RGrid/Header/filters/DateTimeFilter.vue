@@ -6,8 +6,11 @@
     <div class="dropdown-menu" style="position:relative; width:400px; padding:2px; border:2px solid gray">
       <button type="button" class="close" style="position:absolute; right:-10px; top:-15px;" @click="closeToogle"><span aria-hidden="true">&times;</span></button>
       <div class="form-row">
-        <div class="col-sm-3">
+        <div v-bind:class="CurrentCollClass">
           <select v-model="SelectedCondition" class="form-control custom-select-sm"> <option v-for="option in ConditionArray" :key="option" :value="option"> {{ option }} </option></select>
+        </div>
+        <div class="col-12" v-if="SelectedCondition == 'Between'">
+          <input  type="datetime-local" class="form-control form-control-sm" ref="input" v-model="keywordStart">
         </div>
         <div class="col">
           <div class="input-group input-group-sm ">
@@ -29,34 +32,43 @@
     mixins: [props],
     data: () => ({
       keyword: '',
+      keywordStart: '',
       SelectedCondition: 'Equal',
+      CurrentCollClass : 'col-3',
       CanClose: false,
-      ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen"],
+      ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "Between"],
     }),
     mounted() {
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
     },
-    watch: { keyword(kw) { if (kw === '') this.search() } },
+    watch: {
+      keyword(kw) { if (kw === '') this.search() },
+      SelectedCondition(sc) {
+        if (sc === 'Between') {
+          this.CurrentCollClass = 'col-12';
+        }
+        else {
+          this.CurrentCollClass = 'col-3';
+        } 
+      },
+    }, 
     methods: {
       search() {
         const { Query, field } = this
-        var ItemIndex = Query.filter.map(x => x.field).indexOf(field);
-        if (ItemIndex >= 0) {
-          this.closeToogle();
-          if (this.keyword === '') { Query.filter.splice(ItemIndex, 1); return; }
-          Query.filter.splice(ItemIndex, 1);
-          Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword })
-        }
-        else { Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) }
-
         Query.offset = 0
         this.closeToogle();
+        var ItemIndex = Query.filter.map(x => x.field).indexOf(field); 
+        if (ItemIndex >= 0) {
+          Query.filter.splice(ItemIndex, 1); 
+          if (this.keyword === '') {  return; } 
+        }
+        Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ?   this.keywordStart + ";"   : "")  + this.keyword })
       },
       closeToogle() {
         this.CanClose = true;
         $(this.$el.children[0]).dropdown('hide');
         this.CanClose = false;
-      }
+      },  
 
     }
   }

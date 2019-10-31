@@ -32,9 +32,7 @@
           var indexOfitem = sort.map(x => x.field).indexOf(this.Column.field);
           if (indexOfitem >= 0) {
             this.order = sort[indexOfitem].order;
-          }
-
-          //this.order = field === this.field ? order : ''
+          } 
         },
         deep: true,
         immediate: true
