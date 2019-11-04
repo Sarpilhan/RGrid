@@ -24,3 +24,5 @@ Vue.component('RHeader', RHeader);
 Vue.component('RFooter', RFooter);
 Vue.component('RBody', RBody);
 Vue.component('RPagination', RPagination); 
+
+export default RGrid;
