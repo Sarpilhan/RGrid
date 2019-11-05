@@ -9,6 +9,7 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+RGRid.njsproj
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and

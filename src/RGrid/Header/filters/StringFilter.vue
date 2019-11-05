@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-12 mb-2">
-          <span class="badge badge-pill badge-light" v-for="item in tagList"  style="font-size:14px;">
+          <span class="badge badge-pill badge-light" v-for="(item,index) in tagList" :key="index"  style="font-size:14px;">
             {{ item }}   &nbsp;&nbsp;
             <span aria-hidden="true" style="font-size:14px; cursor:pointer" @click="removeTag(item)">&times;</span>
           </span>
