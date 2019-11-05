@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <select class="form-control" v-model="SelectedPageSize" style="width:100px; display:inline-flex">
-      <option v-for="page in PageSize" v-bind:value="page">{{ page }}</option>
+    <select class="form-control" v-model="selectedPageSize" style="width:100px; display:inline-flex">
+      <option v-for="(page,index) in pageSize" :key="index" v-bind:value="page">{{ page }}</option>
     </select> &nbsp;&nbsp;&nbsp;
     <ul class="pagination" style="margin: 0; display:inline-flex" name="Pagination">
       <li v-if="!isFirstPage" class="page-item" @click="turnPage(-1)">
@@ -9,7 +9,7 @@
           <i class="fa fa-arrow-left"></i>
         </a>
       </li>
-      <li v-for="i in dspBtns" :class="['page-item', { 'active': i === curPage }]">
+      <li v-for="(i, index) in dspBtns" :key="index" :class="['page-item', { 'active': i === curPage }]">
         <a v-if="i" href="#" class="page-link" @click.prevent="handleClick(i)">
           {{ i }}
         </a>
@@ -30,21 +30,21 @@
   export default {
     name: 'Pagination',
     props: {
-      Total: { type: Number, required: true },
-      Query: { type: Object, required: true },
-      PageSize: { type: Array, required: true },
+      total: { type: Number, required: true },
+      query: { type: Object, required: true },
+      pageSize: { type: Array, required: true },
     },
     data: () => ({
-      SelectedPageSize: 0
+      selectedPageSize: 0
     }),
     created() {
-      this.SelectedPageSize = this.Query.limit;
+      this.selectedPageSize = this.query.limit;
     },
     watch: {
-      SelectedPageSize: {
+      selectedPageSize: {
         handler(val, oldVal) {
           if (val !== oldVal) {
-            this.Query.limit = val;
+            this.query.limit = val;
           }
         },
         deep: true
@@ -53,19 +53,19 @@
     mixins: [PropsMixin],
     computed: {
       isFirstPage() {
-        return +this.Query.offset === 0 || +this.Query.limit >= this.Total
+        return +this.query.offset === 0 || +this.query.limit >= this.total
       },
       isLastPage() {
-        return +this.Query.offset + +this.Query.limit >= this.Total
+        return +this.query.offset + +this.query.limit >= this.total
       },
       TotalPage() {
-        return Math.ceil(this.Total / +this.Query.limit)
+        return Math.ceil(this.total / +this.query.limit)
       },
       curPage() {
-        return Math.ceil(+this.Query.offset / +this.Query.limit) + 1
+        return Math.ceil(+this.query.offset / +this.query.limit) + 1
       },
       dspBtns() {
-        const n = this.TotalPage
+        const n = this.totalPage
         const i = this.curPage
 
         /* eslint-disable */
@@ -74,7 +74,7 @@
           while (n) { arr[n - 1] = n-- }
           return arr
         })(n)
-        if (i <= 5) return [1, 2, 3, 4, 5, 6, 7, 0, n] // 0 represents `···`
+        if (i <= 5) return [1, 2, 3, 4, 5, 6, 7, 0, n] // 0 represents `ï¿½ï¿½ï¿½`
         if (i >= n - 4) return [1, 0, n - 6, n - 5, n - 4, n - 3, n - 2, n - 1, n]
         return [1, 0, i - 2, i - 1, i, i + 1, i + 2, 0, n]
         /* eslint-enable */
@@ -82,11 +82,11 @@
     },
     methods: {
       handleClick(n) {
-        this.Query.offset = (n - 1) * +this.Query.limit
+        this.query.offset = (n - 1) * +this.query.limit
       },
       turnPage(i) {
         if (i < 0 && this.isFirstPage || i > 0 && this.isLastPage) return
-        this.Query.offset = +this.Query.offset + i * +this.Query.limit
+        this.query.offset = +this.query.offset + i * +this.query.limit
       }
     }
   }

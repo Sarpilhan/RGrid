@@ -1,12 +1,12 @@
 <template> 
-  <th> {{ Summary }}</th> 
+  <th> {{ summary }}</th> 
 </template>
 
 <script>
   export default {
     name: "RFooter",
     props: {
-      Summary: { type: String, required: false },
+      summary: { type: String, required: false },
     } 
   }
 </script>

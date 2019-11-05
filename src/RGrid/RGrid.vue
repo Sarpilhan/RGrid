@@ -1,16 +1,16 @@
 <template>
   <div> 
-    <div :class="IsResponsive">
-      <table :class="['table', TableClass]" :style="TableStyle">
+    <div :class="isResponsive == true ? 'table-responsive' : ''">
+      <table :class="['table', tableClass]" :style="tableStyle">
         <thead>
           <tr>
-            <RHeader v-for="(column, index) in Columns" :key="index" :Column="column" v-if="column.visible" v-bind="$props"></RHeader>
+            <RHeader v-for="(column, index) in columns" :key="index" :column="column" v-if="column.visible" v-bind="$props"></RHeader>
           </tr>
         </thead>
-        <RBody :Dataset="Dataset" :Columns="Columns"></RBody> 
-        <tfoot>
+        <RBody :dataset="dataset" :columns="columns" v-if="dataset.length > 0"></RBody> 
+        <tfoot v-if="summary !== null && Summary !== undefined">
           <tr>
-            <RFooter v-for="column in Columns" :key="column.field" :Summary="Summary[column.field]" v-if="column.visible"></RFooter>
+            <RFooter v-for="column in columns" :key="column.field" :summary="summary[column.field]" v-if="column.visible"></RFooter>
           </tr>
         </tfoot>
       </table>
@@ -25,13 +25,13 @@
     name: "RGrid",
     mixins: [PropsMixin],
     created() {
-      const q = { limit: this.PageSize[0], offset: 0, sort: [], filter: [], ...this.Query }
-      Object.keys(q).forEach(key => { this.$set(this.Query, key, q[key]) })
+      const q = { limit: this.pageSize[0], offset: 0, sort: [], filter: [], ...this.query }
+      Object.keys(q).forEach(key => { this.$set(this.query, key, q[key]) })
     }, 
     watch: {
       Query : {
         handler() {
-          if (!this.IsServerSide) {
+          if (!this.isServerSide) {
             console.log("ClientSideEvents");
           } 
         },

@@ -1,12 +1,12 @@
 <template>
-  <th :class="Column.class" style="white-space: nowrap;" :style=" Column.style">
-    {{ Column.title }}  &nbsp;&nbsp;&nbsp;
-    <i v-if="Column.sortable" :class="['CursorPointer', cls ]" @click="ChangeSort"></i>
-    <component v-if="Column.filter"
-               :is="forDynCompIs(Column.filter)"
-               :column="Column"
-               :field="Column.field"
-               :title="Column.title"
+  <th :class="column.class" style="white-space: nowrap;" :style=" column.style">
+    {{ column.title }}  &nbsp;&nbsp;&nbsp;
+    <i v-if="column.sortable" :class="['CursorPointer', cls ]" @click="changeSort"></i>
+    <component v-if="column.filter"
+               :is="forDynCompIs(column.filter)"
+               :column="column"
+               :field="column.field"
+               :title="column.title"
                v-bind="$props">
     </component>
     
@@ -16,12 +16,12 @@
 <script>
   import props from '../Utils/PropsMixin'
   export default {
-    name: "RHEader",
+    name: "RHeader",
     props: {
-      Column: { type: Object, required: true },
-      Query: { type: Object, required: true }
+      column: { type: Object, required: true },
+      query: { type: Object, required: true }
     },
-    mixins: [props ],
+    mixins: [props],
     data: () => ({
       order: '',
       orderArray: ['', 'asc', 'desc']
@@ -29,7 +29,7 @@
     watch: {
       Query: {
         handler({ sort  }) {  
-          var indexOfitem = sort.map(x => x.field).indexOf(this.Column.field);
+          var indexOfitem = sort.map(x => x.field).indexOf(this.column.field);
           if (indexOfitem >= 0) {
             this.order = sort[indexOfitem].order;
           } 
@@ -53,21 +53,21 @@
     },
     methods: {
       ChangeSort() {
-        const { Query, orderArray } = this;
-          var indexOfitem = Query.sort.map(x => x.field).indexOf(this.Column.field);
+        const { query, orderArray } = this;
+          var indexOfitem = query.sort.map(x => x.field).indexOf(this.Column.field);
           if (indexOfitem >= 0) {
-            var indexOfOrder = this.orderArray.indexOf(Query.sort[indexOfitem].order);
+            var indexOfOrder = this.orderArray.indexOf(query.sort[indexOfitem].order);
             indexOfOrder = (indexOfOrder + 1) % 3;
             if (indexOfOrder === 0) { 
-              Query.sort.splice(indexOfitem, 1);
+              query.sort.splice(indexOfitem, 1);
               this.order = '';
               return;
             }
-            Query.sort[indexOfitem].order = orderArray[indexOfOrder];
+            query.sort[indexOfitem].order = orderArray[indexOfOrder];
             this.order = orderArray[indexOfOrder];
           }
           else {
-            Query.sort.push({ field: this.Column.field, order: orderArray[1] })
+            query.sort.push({ field: this.column.field, order: orderArray[1] })
             this.order = orderArray[1];
           } 
       }

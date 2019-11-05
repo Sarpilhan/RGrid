@@ -1,15 +1,16 @@
 export default {
   props: {
-    Columns: { type: Array, required: true },
-    Dataset: { type: Array, required: true }, 
-    Total: { type: Number, required: true },
-    Query: { type: Object, required: true },
-    PageSize: { type: Array, required: true },
-    Summary: Object, 
+    columns: { type: Array, required: true },
+    dataset: { type: Array, required: true }, 
+    total: { type: Number, required: true },
+    query: { type: Object, required: true },
+    pageSize: { type: Array, required: true },
+    summary: Object, 
     xprops: Object, 
-    TableClass: [String, Object, Array], 
-    TableStyle: [String, Object, Array],  
-    IsResponsive : String
+    tableClass: [String, Object, Array], 
+    tableStyle: [String, Object, Array],  
+    isResponsive: [String, Boolean],
+    isServerSide: [String, Boolean]
   },
   data() {
     let datatableInstance = this
