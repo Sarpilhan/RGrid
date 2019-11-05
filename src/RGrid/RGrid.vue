@@ -4,10 +4,10 @@
       <table :class="['table', tableClass]" :style="tableStyle">
         <thead>
           <tr>
-            <RHeader v-for="(column, index) in visibleColumns" :key="index" :column="column" v-bind="$props"></RHeader>
+            <RHeader v-for="(column, index) in visibleColumns" :key="index" :column="column" ></RHeader>
           </tr>
         </thead>
-        <RBody :dataset="dataset" :columns="columns" v-if="dataset.length > 0"></RBody> 
+        <RBody :dataset="dataset" :columns="columns" v-if="dataset.length > 0" v-bind="$props"></RBody> 
         <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
             <RFooter v-for="column in visibleColumns" :key="column.field" :summary="summary[column.field]"></RFooter>
@@ -36,8 +36,8 @@
     watch: {
       Query : {
         handler() {
-          if (!this.isServerSide) {
-            console.log("ClientSideEvents");
+          if (!this.isServerSide) {  
+            //consoe
           } 
         },
         deep: true

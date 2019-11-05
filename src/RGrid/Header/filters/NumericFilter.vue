@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-12 mb-2">
-          <span class="badge badge-pill badge-light" v-for="item in tagList" style="font-size:14px;">
+          <span class="badge badge-pill badge-light" v-for="(item, index) in tagList" :key="index" style="font-size:14px;">
             {{ item }}   &nbsp;&nbsp;
             <span aria-hidden="true" style="font-size:14px; cursor:pointer" @click="removeTag(item)">&times;</span>
           </span>
@@ -69,18 +69,17 @@
     watch: { keyword(kw) { if (kw === '') this.search() } },
     methods: {
       search() {
-        const { Query, field } = this
-        Query.offset = 0
+        const { query, field } = this
+        query.offset = 0
         this.closeToogle();
-        var ItemIndex = Query.filter.map(x => x.field).indexOf(field);
+        var ItemIndex = query.filter.map(x => x.field).indexOf(field);
         if (ItemIndex >= 0) {
-          Query.filter.splice(ItemIndex, 1);
+          query.filter.splice(ItemIndex, 1);
           if (this.keyword === '') { return; }
         }
-        Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ? this.keywordStart + ";" : "") + this.keyword })
+        query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ? this.keywordStart + ";" : "") + this.keyword })
       },
-      searchTag() {
-        console.log(this.tagList);
+      searchTag() { 
         this.keyword = this.tagList;
         this.search();
       },

@@ -65,18 +65,17 @@
     watch: { keyword(kw) { if (kw === '') this.search() } },
     methods: {
       search() {
-        const { Query, field } = this
-        Query.offset = 0
+        const { query, field } = this
+        query.offset = 0
         this.closeToogle();
-        var ItemIndex = Query.filter.map(x => x.field).indexOf(field); 
+        var ItemIndex = query.filter.map(x => x.field).indexOf(field); 
         if (ItemIndex >= 0) {
-          Query.filter.splice(ItemIndex, 1); 
+          query.filter.splice(ItemIndex, 1); 
           if (this.keyword === '') {  return; } 
         }
-        Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) 
+        query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) 
       },
-      searchTag() {
-        console.log(this.tagList);
+      searchTag() { 
         this.keyword = this.tagList;
         this.search();
       },
