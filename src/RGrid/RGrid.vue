@@ -8,7 +8,7 @@
           </tr>
         </thead>
         <RBody :dataset="dataset" :columns="columns" v-if="dataset.length > 0"></RBody> 
-        <tfoot v-if="summary !== null && Summary !== undefined">
+        <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
             <RFooter v-for="column in columns" :key="column.field" :summary="summary[column.field]" v-if="column.visible"></RFooter>
           </tr>

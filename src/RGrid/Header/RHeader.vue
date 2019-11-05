@@ -27,8 +27,8 @@
       orderArray: ['', 'asc', 'desc']
     }),
     watch: {
-      Query: {
-        handler({ sort  }) {  
+      query: {
+        handler({ sort }) {  
           var indexOfitem = sort.map(x => x.field).indexOf(this.column.field);
           if (indexOfitem >= 0) {
             this.order = sort[indexOfitem].order;
@@ -52,7 +52,7 @@
       }
     },
     methods: {
-      ChangeSort() {
+      changeSort() {
         const { query, orderArray } = this;
           var indexOfitem = query.sort.map(x => x.field).indexOf(this.Column.field);
           if (indexOfitem >= 0) {

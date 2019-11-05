@@ -1,7 +1,7 @@
 ﻿<template>
   <div class="home">
     {{msg}}
-    <RGrid :Columns="productColumns" :Summary="productSummary" :Dataset="productData" :TableClass="TableClass" :IsResponsive="IsResponsive" :Query="Query" :Total="Total" :PageSize="PageSize" :IsServerSide="IsServerSide"></RGrid>
+    <RGrid :columns="productColumns" :summary="productSummary" :dataset="productData" :tableClass="TableClass" :isResponsive="IsResponsive" :query="Query" :total="Total" :pageSize="PageSize" :isServerSide="IsServerSide"></RGrid>
     {{ Query }} 
   </div>
 </template>
