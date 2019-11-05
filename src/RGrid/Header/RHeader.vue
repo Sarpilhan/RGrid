@@ -54,7 +54,7 @@
     methods: {
       changeSort() {
         const { query, orderArray } = this;
-          var indexOfitem = query.sort.map(x => x.field).indexOf(this.Column.field);
+          var indexOfitem = query.sort.map(x => x.field).indexOf(this.column.field);
           if (indexOfitem >= 0) {
             var indexOfOrder = this.orderArray.indexOf(query.sort[indexOfitem].order);
             indexOfOrder = (indexOfOrder + 1) % 3;
