@@ -62,7 +62,7 @@
       tagList: [],
       SelectedCondition: 'Equal',
       CanClose: false,
-      ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "In", "Between"],
+      ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "In", "Between"],  
     }),
     mounted() {
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });

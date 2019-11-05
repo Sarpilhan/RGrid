@@ -10,11 +10,13 @@
 </template>
 
 <script>
+  import props from '../Utils/PropsMixin'
   export default {
     name: "RBody",
     props: {
       dataset: { type: Array, required: false },
       columns: { type: Array, required: false },
-    } 
+    },
+    mixins: [props],
   }
 </script>
