@@ -4,7 +4,7 @@
       <table :class="['table', tableClass]" :style="tableStyle">
         <thead>
           <tr>
-            <RHeader v-for="(column, index) in visibleColumns" :key="index" :column="column" ></RHeader>
+            <RHeader v-for="(column, index) in visibleColumns" :key="index" :column="column" v-bind="$props" ></RHeader>
           </tr>
         </thead>
         <RBody :dataset="dataset" :columns="columns" v-if="dataset.length > 0" v-bind="$props"></RBody> 
