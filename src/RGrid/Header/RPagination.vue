@@ -28,12 +28,7 @@
 <script>
   import PropsMixin from '../Utils/PropsMixin'
   export default {
-    name: 'Pagination',
-    props: {
-      total: { type: Number, required: true },
-      query: { type: Object, required: true },
-      pageSize: { type: Array, required: true },
-    },
+    name: 'Pagination', 
     data: () => ({
       selectedPageSize: 0
     }),

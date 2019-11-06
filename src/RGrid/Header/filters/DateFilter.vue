@@ -62,7 +62,7 @@
       tagList: [],
       SelectedCondition: 'Equal',
       CanClose: false,
-      ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "In", "Between"],
+      ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "In", "Between"],  
     }),
     mounted() {
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
@@ -80,15 +80,15 @@
     },
     methods: {
       search() {
-        const { Query, field } = this
-        Query.offset = 0
+        const { query, field } = this
+        query.offset = 0
         this.closeToogle();
-        var ItemIndex = Query.filter.map(x => x.field).indexOf(field); 
+        var ItemIndex = query.filter.map(x => x.field).indexOf(field); 
         if (ItemIndex >= 0) {
-          Query.filter.splice(ItemIndex, 1); 
+          query.filter.splice(ItemIndex, 1); 
           if (this.keyword === '') {  return; } 
         }
-        Query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ?   this.keywordStart + ";"   : "")  + this.keyword })
+        query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ?   this.keywordStart + ";"   : "")  + this.keyword })
       },
       searchTag() {
         console.log(this.tagList);

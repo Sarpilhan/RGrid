@@ -2,14 +2,7 @@
   <th :class="column.class" style="white-space: nowrap;" :style=" column.style">
     {{ column.title }}  &nbsp;&nbsp;&nbsp;
     <i v-if="column.sortable" :class="['CursorPointer', cls ]" @click="changeSort"></i>
-    <component v-if="column.filter"
-               :is="forDynCompIs(column.filter)"
-               :column="column"
-               :field="column.field"
-               :title="column.title"
-               v-bind="$props">
-    </component>
-    
+    <component v-if="column.filter" :is="forDynCompIs(column.filter)" :column="column" :field="column.field" :title="column.title" v-bind="$props"> </component> 
   </th>
 </template>
 
@@ -18,8 +11,7 @@
   export default {
     name: "RHeader",
     props: {
-      column: { type: Object, required: true },
-      query: { type: Object, required: true }
+      column: { type: Object, required: true } 
     },
     mixins: [props],
     data: () => ({

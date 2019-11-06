@@ -1,5 +1,5 @@
 <template> 
-  <th> {{ summary }}</th> 
+  <th v-if="summary"> {{ summary }}</th> 
 </template>
 
 <script>
