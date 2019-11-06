@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import RHeader from './Header/RHeader';
 import RFooter from './Header/RFooter';
 import RBody from './Header/RBody';
