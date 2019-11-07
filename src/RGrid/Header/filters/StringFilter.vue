@@ -13,7 +13,7 @@
           <div class="input-group input-group-sm ">
             <input type="search" class="form-control" ref="input" v-model="keyword" @keydown.enter="search" :placeholder="`Search ${field}...`">
             <div class="input-group-append">
-              <button type="button" class="btn btn-secondary" @click="search">Right</button>
+              <button type="button" class="btn btn-secondary" @click="search">Ok</button>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="col-12">
-          <button type="button" class="btn btn-secondary btn-sm btn-block" @click="searchTag">Right </button>
+          <button type="button" class="btn btn-secondary btn-sm btn-block" @click="searchTag">Ok</button>
         </div>
       </div>
     </div>
@@ -55,11 +55,12 @@
       keyword: '',
       tagKeyword: '',
       tagList: [],
-      SelectedCondition: 'Equal',
+      SelectedCondition: 'Like',
       CanClose: false,
-      ConditionArray: ["Equal", "NotEqual", "Like", "NotLike", "In"],
+      ConditionArray: ["Like", "NotLike", "Equal", "NotEqual", "In"],
     }),
     mounted() {
+      //eslint-disable-next-line
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
     },
     watch: { keyword(kw) { if (kw === '') this.search() } },
@@ -81,6 +82,7 @@
       },
       closeToogle() {
         this.CanClose = true;
+        //eslint-disable-next-line
         $(this.$el.children[0]).dropdown('hide');
         this.CanClose = false;
       },

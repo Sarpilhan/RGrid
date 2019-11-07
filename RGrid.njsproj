@@ -42,6 +42,7 @@
     <Content Include="src\RGrid\Header\filters\StringFilter.vue" />
     <Content Include="src\RGrid\Header\RFooter.vue" />
     <Content Include="src\RGrid\Header\RBody.vue" />
+    <Content Include="src\RGrid\Header\RBodyClientSide.vue" />
     <Content Include="src\RGrid\Header\RHeader.vue" />
     <Content Include="src\RGrid\index.js" />
     <Content Include="src\RGrid\Header\RPagination.vue" />

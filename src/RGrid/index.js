@@ -2,6 +2,7 @@ import Vue from 'vue';
 import RHeader from './Header/RHeader';
 import RFooter from './Header/RFooter';
 import RBody from './Header/RBody';
+import RBodyClientSide from './Header/RBodyClientSide';
 import RPagination from './Header/RPagination'; 
 import RGrid from './RGrid';
 import StringFilter from './Header/filters/StringFilter';
@@ -23,6 +24,7 @@ Vue.component('RGrid', RGrid);
 Vue.component('RHeader', RHeader);
 Vue.component('RFooter', RFooter);
 Vue.component('RBody', RBody);
+Vue.component('RBodyClientSide', RBodyClientSide);
 Vue.component('RPagination', RPagination); 
 
 export default RGrid;

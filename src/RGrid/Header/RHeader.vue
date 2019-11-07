@@ -2,7 +2,8 @@
   <th :class="column.class" style="white-space: nowrap;" :style="column.style">
     {{ column.title }}  &nbsp;&nbsp;&nbsp;
     <i v-if="column.sortable" :class="['CursorPointer', cls ]" @click="changeSort"></i>
-    <component v-if="column.filter" :is="forDynCompIs(column.filter)" :column="column" :field="column.field" :title="column.title" v-bind="$props"> </component> 
+    <component v-if="column.filter" :is="forDynCompIs(column.filter)" :column="column" 
+               :field="column.field" :title="column.title" v-bind="$props" /> 
   </th>
 </template>
 
@@ -18,18 +19,6 @@
       order: '',
       orderArray: ['', 'asc', 'desc']
     }),
-    watch: {
-      query: {
-        handler({ sort }) {  
-          var indexOfitem = sort.map(x => x.field).indexOf(this.column.field);
-          if (indexOfitem >= 0) {
-            this.order = sort[indexOfitem].order;
-          } 
-        },
-        deep: true,
-        immediate: true
-      }
-    },
     computed: {
       cls() {
         const { order } = this
@@ -55,8 +44,8 @@
               this.order = '';
               return;
             }
-            query.sort[indexOfitem].order = orderArray[indexOfOrder];
             this.order = orderArray[indexOfOrder];
+            query.sort.splice(indexOfitem, 1, {...query.sort[indexOfitem], order: this.order})
           }
           else {
             query.sort.push({ field: this.column.field, order: orderArray[1] })

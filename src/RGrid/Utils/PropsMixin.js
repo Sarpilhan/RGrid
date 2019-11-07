@@ -28,7 +28,9 @@ export default {
     forDynCompIs(component) {
       // according to https://vuejs.org/v2/guide/components.html#Dynamic-Components
       // dynamic components can be names (string) or component objects
-      return typeof component === 'object' ? component : this.comp[component]
+      if(!component) return
+      component = component[0].toUpperCase() + component.slice(1).toLowerCase()
+      return typeof component === 'object' ? component : this.comp[component.includes("filter") ? component : component + "Filter"]
     }
   }
 }
