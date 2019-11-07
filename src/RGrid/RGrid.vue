@@ -7,7 +7,7 @@
             <RHeader v-for="(column, index) in visibleColumns" :key="index" :column="column" v-bind="$props" ></RHeader>
           </tr>
         </thead>
-        <RBody :dataset="dataset" :columns="columns" v-if="dataset.length > 0" v-bind="$props"></RBody> 
+        <RBody v-if="dataset.length > 0" :dataset="dataset" :columns="columns" v-bind="$props"></RBody> 
         <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
             <RFooter v-for="column in visibleColumns" :key="column.field" :summary="summary[column.field]"></RFooter>
@@ -15,7 +15,7 @@
         </tfoot>
       </table>
     </div>
-    <RPagination v-bind="$props"></RPagination>
+    <RPagination v-if="dataset.length > 0" v-bind="$props"></RPagination>
   </div>
 </template>
 
@@ -36,9 +36,11 @@
     watch: {
       Query : {
         handler() {
-          if (!this.isServerSide) {  
-            //consoe
-          } 
+          if (this.isServerSide) {  
+            //todo
+          } else {
+            //todo
+          }
         },
         deep: true
       },

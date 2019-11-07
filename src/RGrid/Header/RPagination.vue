@@ -33,7 +33,7 @@
       selectedPageSize: 0
     }),
     created() {
-      this.selectedPageSize = this.query.limit;
+      this.selectedPageSize = this.query.limit
     },
     watch: {
       selectedPageSize: {
@@ -47,21 +47,24 @@
     },
     mixins: [PropsMixin],
     computed: {
+      totalLength() {
+        return this.total || this.dataset.length
+      },
       isFirstPage() {
-        return +this.query.offset === 0 || +this.query.limit >= this.total
+        return +this.query.offset === 0 || +this.query.limit >= this.totalLength
       },
       isLastPage() {
-        return +this.query.offset + +this.query.limit >= this.total
+        return +this.query.offset + +this.query.limit >= this.totalLength
       },
-      TotalPage() {
-        return Math.ceil(this.total / +this.query.limit)
+      totalPage() {
+        return Math.ceil(this.totalLength / +this.query.limit)
       },
       curPage() {
         return Math.ceil(+this.query.offset / +this.query.limit) + 1
       },
       dspBtns() {
-        const n = this.totalPage
         const i = this.curPage
+        const n = this.totalPage
 
         /* eslint-disable */
         if (n <= 9) return ((n) => {

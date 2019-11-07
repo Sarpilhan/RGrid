@@ -1,12 +1,10 @@
 export default {
   props: {
-    columns: { type: Array, required: true },
-    dataset: { type: Array, required: true },
-    total: { type: Number, required: true },
-    pageSize: { type: Array, required: true },
-    query: {
-      type: Object, required: true, default: { limit: 0, offset: 0, sort: [], filter: [] }
-    },
+    columns: { type: Array, required: true, default: [] },
+    dataset: { type: Array, required: true, default: [] },
+    total: { type: Number, required: false, default: undefined },
+    pageSize: { type: Array, required: false, default: [10, 20, 30, 40, 50] },
+    query: { type: Object },
     summary: Object,
     xprops: Object,
     tableClass: [String, Object, Array],
