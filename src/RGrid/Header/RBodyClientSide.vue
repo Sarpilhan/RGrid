@@ -12,12 +12,11 @@
 <script>
   import props from '../Utils/PropsMixin'
   export default {
-    name: "RBody", 
+    name: "RBodyClientSide", 
     mixins: [props],
-    data() {
-      return {
-        rgridDataset: [...this.dataset]
-      }
+    created() {
+      this.rgridDataset = [...this.dataset]
+      this.rgridTotal = this.total
     },
     computed: {
       visibleColumns() {
@@ -67,6 +66,7 @@
           }
           return result
         })
+        this.rgridTotal = this.rgridDataset.length
       },
       sortBy() {
         for(let sort of this.query.sort) {

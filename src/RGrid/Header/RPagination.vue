@@ -1,4 +1,8 @@
 <template>
+<div>
+  <div class="float-left mt-3">
+    <span>Total: {{ totalLength }}</span>
+  </div>
   <div class="text-center">
     <select class="form-control" v-model="selectedPageSize" style="width:100px; display:inline-flex">
       <option v-for="(page,index) in pageSize" :key="index" v-bind:value="page">{{ page }}</option>
@@ -24,6 +28,7 @@
       </li>
     </ul>
   </div>
+</div>
 </template>
 <script>
   import PropsMixin from '../Utils/PropsMixin'
@@ -33,6 +38,7 @@
       selectedPageSize: 0
     }),
     created() {
+      console.log("rpagination created");
       this.selectedPageSize = this.query.limit
     },
     watch: {
@@ -44,11 +50,17 @@
         },
         deep: true
       },
+      rgridTotal: {
+        handler(val) {
+          console.log(val);
+        }
+      }
     },
     mixins: [PropsMixin],
     computed: {
       totalLength() {
-        return this.total || this.dataset.length
+        // console.log(this.rgridTotal || this.rgridDataset.length);
+        return this.rgridDataset.length
       },
       isFirstPage() {
         return +this.query.offset === 0 || +this.query.limit >= this.totalLength

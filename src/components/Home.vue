@@ -29,7 +29,7 @@
           { title: "Description", field: "Description", visible: false },
           { title: "Tax Rate", field: "TaxRate", visible: false },
           { title: "Shelf Life", field: "ShelfLife", visible: true },
-          { title: "Status", field: "IsActive", visible: true, tdComp: "ActiveDisplay", filter: "BoolenFilter" },
+          { title: "Status", field: "IsActive", visible: true, tdComp: "ActiveDisplay", filter: "BooleanFilter" },
           { title: "Operation", tdComp: "operation", buttons: ["delete","edit", "epc"] }
         ],
         productSummary: { Name: "Total"  } ,

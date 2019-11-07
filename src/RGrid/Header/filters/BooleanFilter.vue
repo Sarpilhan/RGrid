@@ -18,7 +18,7 @@
 <script>
   import props from '../../Utils/PropsMixin'
   export default {
-    name: "BoolenFilter",
+    name: "BooleanFilter",
     props: ['field', 'title'],
     mixins: [props],
     data: () => ({
@@ -28,6 +28,7 @@
       ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen"],
     }),
     mounted() {
+      //eslint-disable-next-line
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
     },
     methods: {
@@ -44,6 +45,7 @@
       },
       closeToogle() {
         this.CanClose = true;
+        //eslint-disable-next-line
         $(this.$el.children[0]).dropdown('hide');
         this.CanClose = false;
       },

@@ -20,7 +20,10 @@ export default {
     }
     return {
       // the source of dynamic components (thComp / tdComp / nested components)
-      comp: datatableInstance.$parent.$options.components
+      comp: datatableInstance.$parent.$options.components,
+      isLoading: false,
+      rgridDataset: [],
+      rgridTotal: 0
     }
   },
   methods: {
@@ -28,8 +31,9 @@ export default {
     forDynCompIs(component) {
       // according to https://vuejs.org/v2/guide/components.html#Dynamic-Components
       // dynamic components can be names (string) or component objects
-      if(!component) return
-      component = component[0].toUpperCase() + component.slice(1).toLowerCase()
+      if (!component && typeof component === "string") {
+        component = component[0].toUpperCase() + component.slice(1).toLowerCase()
+      }
       return typeof component === 'object' ? component : this.comp[component.includes("filter") ? component : component + "Filter"]
     }
   }

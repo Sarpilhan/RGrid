@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import RHeader from './Header/RHeader';
 import RFooter from './Header/RFooter';
-import RBody from './Header/RBody';
 import RBodyClientSide from './Header/RBodyClientSide';
-import RPagination from './Header/RPagination'; 
+import RBodyServerSide from './Header/RBodyServerSide';
+import RPagination from './Header/RPagination';
 import RGrid from './RGrid';
 import StringFilter from './Header/filters/StringFilter';
 import NumericFilter from './Header/filters/NumericFilter';
 import DateFilter from './Header/filters/DateFilter';
 import DateTimeFilter from './Header/filters/DateTimeFilter';
-import BoolenFilter from './Header/filters/BoolenFilter';
+import BooleanFilter from './Header/filters/BooleanFilter';
 
 
 
@@ -17,14 +17,14 @@ Vue.component('StringFilter', StringFilter);
 Vue.component('NumericFilter', NumericFilter);
 Vue.component('DateFilter', DateFilter);
 Vue.component('DateTimeFilter', DateTimeFilter);
-Vue.component('BoolenFilter', BoolenFilter);
+Vue.component('BooleanFilter', BooleanFilter);
 
 
 Vue.component('RGrid', RGrid);
 Vue.component('RHeader', RHeader);
 Vue.component('RFooter', RFooter);
-Vue.component('RBody', RBody);
 Vue.component('RBodyClientSide', RBodyClientSide);
-Vue.component('RPagination', RPagination); 
+Vue.component('RBodyServerSide', RBodyServerSide);
+Vue.component('RPagination', RPagination);
 
 export default RGrid;
