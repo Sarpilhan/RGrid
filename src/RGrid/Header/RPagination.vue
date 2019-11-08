@@ -34,11 +34,15 @@
   import PropsMixin from '../Utils/PropsMixin'
   export default {
     name: 'Pagination', 
+    mixins: [PropsMixin],
+    props: {
+      rgridDataset: { type: Array, required: false, default: () => [] },
+      rgridTotal: { type: Number, required: false, default: 0 },
+    },
     data: () => ({
       selectedPageSize: 0
     }),
     created() {
-      console.log("rpagination created");
       this.selectedPageSize = this.query.limit
     },
     watch: {
@@ -49,18 +53,11 @@
           }
         },
         deep: true
-      },
-      rgridTotal: {
-        handler(val) {
-          console.log(val);
-        }
       }
     },
-    mixins: [PropsMixin],
     computed: {
       totalLength() {
-        // console.log(this.rgridTotal || this.rgridDataset.length);
-        return this.rgridDataset.length
+        return this.rgridTotal || this.rgridDataset.length
       },
       isFirstPage() {
         return +this.query.offset === 0 || +this.query.limit >= this.totalLength

@@ -14,24 +14,34 @@
   export default {
     name: "RBodyClientSide", 
     mixins: [props],
+    props: {
+      rgridDataset: { type: Array, required: false, default: () => [...this.dataset] },
+      rgridTotal: { type: Number, required: false, default: () => this.total },
+    },
     created() {
-      this.rgridDataset = [...this.dataset]
-      this.rgridTotal = this.total
+      this.$emit("update:rgridTotal", this.clientSideDataset.length)
+    },
+    data() {
+      return {
+        clientSideDataset: [...this.dataset]
+      }
     },
     computed: {
       visibleColumns() {
         return this.columns.filter(c => c.visible)
       },
       visibleDataset() {
-        return this.rgridDataset.slice(this.query.offset, this.query.limit + this.query.offset)
+        return this.clientSideDataset.slice(this.query.offset, this.query.limit + this.query.offset)
       }
     },
     watch: {
       query: {
         handler() {
-          this.rgridDataset = [...this.dataset]
+          this.clientSideDataset = [...this.dataset]
           this.filterBy()
           this.sortBy()
+          this.$emit("update:rgridDataset", this.clientSideDataset)
+          this.$emit("update:rgridTotal", this.clientSideDataset.length)
         },
         deep: true
       }
@@ -40,7 +50,7 @@
       // "Like", "NotLike", "Equal", "NotEqual", "In"
       filterBy() {
         if(this.query.filter.length === 0) return
-        this.rgridDataset = this.rgridDataset.filter((row) => {
+        this.clientSideDataset = this.clientSideDataset.filter((row) => {
           let result = true
           for(let filter of this.query.filter) {
             switch (filter.condition) {
@@ -66,11 +76,10 @@
           }
           return result
         })
-        this.rgridTotal = this.rgridDataset.length
       },
       sortBy() {
         for(let sort of this.query.sort) {
-          this.rgridDataset =  this.rgridDataset.sort(this.dynamicSort((sort.order == "asc" ? "" : "-") + sort.field));
+          this.clientSideDataset =  this.clientSideDataset.sort(this.dynamicSort((sort.order == "asc" ? "" : "-") + sort.field));
         }
       },
       dynamicSort(property) {

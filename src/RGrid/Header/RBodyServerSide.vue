@@ -14,9 +14,18 @@
   export default {
     name: "RBodyServerSide", 
     mixins: [props],
+    props: {
+      rgridDataset: { type: Array, required: false, default: () => [] },
+      rgridTotal: { type: Number, required: false, default: 0 },
+    },
     computed: {
       visibleColumns() {
         return this.columns.filter(c => c.visible)
+      }
+    },
+    data() {
+      return {
+        isLoading: false,
       }
     },
     created() {
@@ -28,15 +37,14 @@
           this.getTableData()
         },
         deep: true
-      },
+      }
     },
     methods: {
       getTableData() {
-        console.log(this);
         this.isLoading = true
         this.dataMethod(this.query).then((res) => {
-          this.rgridDataset = res.data.ItemList
-          this.rgridTotal = res.data.Count
+          this.$emit("update:rgridDataset", res.data.ItemList)
+          this.$emit("update:rgridTotal", res.data.Count)
         }).catch((err) => {
           console.error(err);
         }).then(() => {

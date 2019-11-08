@@ -39,6 +39,7 @@
       ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "Between"],
     }),
     mounted() {
+      //eslint-disable-next-line
       $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
     },
     watch: {
@@ -66,6 +67,7 @@
       },
       closeToogle() {
         this.CanClose = true;
+        //eslint-disable-next-line
         $(this.$el.children[0]).dropdown('hide');
         this.CanClose = false;
       },  
