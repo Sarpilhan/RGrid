@@ -1,9 +1,10 @@
 export default {
   props: {
     columns: { type: Array, required: true, default: [] },
-    dataset: { type: Array, required: true, default: [] },
+    dataset: { type: Array, required: true, default: () => [] },
     total: { type: Number, required: false, default: undefined },
-    pageSize: { type: Array, required: false, default: [10, 20, 30, 40, 50] },
+    pagination: { type: Boolean, required: false, default: true },
+    pageSize: { type: Array, required: false, default: () => [10, 20, 30, 40, 50] },
     query: { type: Object },
     summary: Object,
     xprops: Object,
