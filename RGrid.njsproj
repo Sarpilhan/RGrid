@@ -35,17 +35,19 @@
     <Content Include="src\components\Home.vue" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="src\RGrid\Header\filters\BoolenFilter.vue" />
+    <Content Include="src\RGrid\Header\filters\BooleanFilter.vue" />
     <Content Include="src\RGrid\Header\filters\DateFilter.vue" />
     <Content Include="src\RGrid\Header\filters\DateTimeFilter.vue" />
     <Content Include="src\RGrid\Header\filters\NumericFilter.vue" />
     <Content Include="src\RGrid\Header\filters\StringFilter.vue" />
+    <Content Include="src\RGrid\Header\RBodyServerSide.vue" />
     <Content Include="src\RGrid\Header\RFooter.vue" />
     <Content Include="src\RGrid\Header\RBody.vue" />
     <Content Include="src\RGrid\Header\RBodyClientSide.vue" />
     <Content Include="src\RGrid\Header\RHeader.vue" />
     <Content Include="src\RGrid\index.js" />
     <Content Include="src\RGrid\Header\RPagination.vue" />
+    <Content Include="src\RGrid\package.json" />
     <Content Include="src\RGrid\RGrid.vue">
       <SubType>Code</SubType>
     </Content>
