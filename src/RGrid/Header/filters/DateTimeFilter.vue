@@ -67,8 +67,7 @@
       },
       closeToogle() {
         this.CanClose = true;
-        //eslint-disable-next-line
-        $(this.$el.children[0]).dropdown('hide');
+        this.$el.children[1].classList.remove("show");
         this.CanClose = false;
       },  
 

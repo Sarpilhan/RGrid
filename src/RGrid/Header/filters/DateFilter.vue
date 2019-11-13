@@ -91,15 +91,13 @@
         }
         query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ?   this.keywordStart + ";"   : "")  + this.keyword })
       },
-      searchTag() {
-        console.log(this.tagList);
+      searchTag() { 
         this.keyword = this.tagList;
         this.search();
       },
       closeToogle() {
         this.CanClose = true;
-        //eslint-disable-next-line
-        $(this.$el.children[0]).dropdown('hide');
+        this.$el.children[1].classList.remove("show");
         this.CanClose = false;
       }, 
       addTag() {
