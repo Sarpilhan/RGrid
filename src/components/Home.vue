@@ -19,8 +19,8 @@
         productColumns: [
           { title: "ID", field: "Id", sortable: true, visible: false },
           { title: "Category Id", field: "CategoryId", visible: false },
-          { title: "Product Name", field: "Name", sortable: true, visible: true, filter: "String" },
-          { title: "Sales Price", field: "SalesPrice", visible: true, filter: "String" },
+          { title: "Product Name", field: "Name", sortable: true, visible: true, filter: "Date" },
+          { title: "Sales Price", field: "SalesPrice", visible: true, filter: "Boolean" },
           { title: "Purchase Price", field: "PurchasePricese", visible: false },
           { title: "Producer", field: "Producer", visible: false },
           { title: "Photo", field: "Photo", sortable: true, visible: false },

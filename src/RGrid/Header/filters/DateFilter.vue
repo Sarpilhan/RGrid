@@ -1,9 +1,9 @@
 <template>
   <div class="btn-group">
-    <button type="button" class="btn btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @click="openToogle">
       <i :class="['fa fa-filter', { 'text-muted': !keyword } ]"></i>
     </button>
-    <div class="dropdown-menu" style="position:relative; width:500px; padding:2px; border:2px solid gray">
+    <div class="dropdown-menu" style="position:absolute; width:500px; padding:2px; border:2px solid gray">
       <button type="button" class="close" style="position:absolute; right:-10px; top:-15px;" @click="closeToogle"><span aria-hidden="true">&times;</span></button>
       <div class="form-row" v-if="SelectedCondition != 'In'">
         <div  v-bind:class="CurrentCollClass">
@@ -100,6 +100,11 @@
         this.$el.children[1].classList.remove("show");
         this.CanClose = false;
       }, 
+      openToogle() {
+        this.CanClose = false;       
+        this.$el.children[1].classList.add("show");
+        this.CanClose = true;
+      },
       addTag() {
         this.tagList.push(this.tagKeyword);
         this.tagKeyword = '';

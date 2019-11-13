@@ -1,9 +1,9 @@
 <template>
   <div class="btn-group">
-    <button type="button" class="btn btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="btn btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @click="openToogle">
       <i :class="['fa fa-filter', { 'text-muted': !keyword } ]"></i>
     </button>
-    <div class="dropdown-menu" style="position:relative; width:123px; padding:2px; border:2px solid gray; min-width:123px;">
+    <div class="dropdown-menu" style="position:absolute; width:123px; padding:2px; border:2px solid gray; min-width:123px;">
       <button type="button" class="close" style="position:absolute; right:-10px; top:-15px;" @click="closeToogle"><span aria-hidden="true">&times;</span></button>
 
       <div class="btn-group" role="group">
@@ -47,6 +47,11 @@
         this.CanClose = true;
         this.$el.children[1].classList.remove("show");
         this.CanClose = false;
+      },
+      openToogle() {
+        this.CanClose = false;       
+        this.$el.children[1].classList.add("show");
+        this.CanClose = true;
       },
       CheckChange(state) {
         this.keyword = state;
