@@ -9,7 +9,7 @@
           </tr>
         </thead>
         <RBodyServerSide v-if="isServerSide" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyServerSide> 
-        <RBodyClientSide v-else :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyClientSide> 
+        <RBodyClientSide v-if="!isServerSide && dataset.length > 0" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyClientSide> 
         <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
             <RFooter v-for="column in visibleColumns" :key="column.field" :summary="summary[column.field]"></RFooter>
@@ -17,7 +17,7 @@
         </tfoot>
       </table>
     </div>
-    <RPagination v-bind="$props" :rgridDataset="rgridDataset" :rgridTotal="rgridTotal"></RPagination>
+    <RPagination v-if="pagination" v-bind="$props" :rgridDataset="rgridDataset" :rgridTotal="rgridTotal"></RPagination>
   </div>
 </template>
 
