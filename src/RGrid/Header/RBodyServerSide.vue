@@ -37,7 +37,15 @@
           this.getTableData()
         },
         deep: true
-      }
+      },
+      xprops: {
+        handler(xp) {
+          if(xp.refresh) {
+            this.getTableData()
+          }
+        },
+        deep: true
+      },
     },
     methods: {
       getTableData() {
@@ -49,6 +57,7 @@
           console.error(err);
         }).then(() => {
           this.isLoading = false
+          if(this.xprops.refresh) this.xprops.refresh = false
         })
       }
     }

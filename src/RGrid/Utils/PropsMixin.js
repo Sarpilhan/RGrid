@@ -1,18 +1,18 @@
 export default {
   props: {
     columns: { type: Array, required: true, default: [] },
-    dataset: { type: Array, required: true, default: () => [] },
+    dataset: { type: Array, required: false, default: () => [] },
     total: { type: Number, required: false, default: undefined },
     pagination: { type: Boolean, required: false, default: true },
     pageSize: { type: Array, required: false, default: () => [10, 20, 30, 40, 50] },
-    query: { type: Object },
-    summary: Object,
-    xprops: Object,
+    query: { type: Object, required: false, default: () => ({ limit: 10, offset: 0, sort: [], filter: [] }) },
+    summary: { type: Object, required: false, default: () => ({}) },
+    xprops: { type: Object, required: false, default: () => ({}) },
     tableClass: [String, Object, Array],
     tableStyle: [String, Object, Array],
-    isResponsive: [String, Boolean],
-    isServerSide: [String, Boolean],
-    dataMethod: { type: Function, required: false, default: null }
+    isResponsive: { type: Boolean, required: false, default: true },
+    isServerSide: { type: Boolean, required: true, default: true },
+    dataMethod: { type: Function, required: false, default: null },
   },
   data() {
     let datatableInstance = this
