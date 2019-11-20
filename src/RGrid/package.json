@@ -1,6 +1,6 @@
 {
   "name": "vuejs-rgrid",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "VueJs DataTable ",
   "main": "index.js",
   "scripts": {
