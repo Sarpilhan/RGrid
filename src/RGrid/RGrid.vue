@@ -10,7 +10,7 @@
         </thead>
         <RBodyServerSide v-if="serverside" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyServerSide> 
         <RBodyClientSide v-else-if="clientside && dataset.length > 0" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyClientSide> 
-        <RBody v-else :dataset="dataset" :columns="columns" v-bind="$props"></RBody> 
+        <RBody v-else :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBody> 
         <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
             <RFooter v-for="column in visibleColumns" :key="column.field" :summary="summary[column.field]"></RFooter>

@@ -1,6 +1,6 @@
 <template>
   <tbody>
-    <tr v-for="(data,index) in visibleDataset" :key="index">
+    <tr v-for="(data,index) in rgridDataset" :key="index">
       <td v-for="(column,colindex) in visibleColumns" :key="colindex"> 
         <component v-if="column.comp" :is="forDynCompIs(column.comp)" :column="column" :row="data" :xprops="xprops"> </component>
         <span v-else> {{ data[column.field] }} </span> 
@@ -14,12 +14,22 @@
   export default {
     name: "RBody", 
     mixins: [props],
+    props: {
+      rgridDataset: { type: Array, required: false, default: () => [] },
+      rgridTotal: { type: Number, required: false, default: 0 },
+    },
+    watch: {
+      dataset: {
+        handler() {
+          this.$emit("update:rgridDataset", this.dataset)
+          this.$emit("update:rgridTotal", this.total)
+        },
+        deep: true
+      }
+    },
     computed: {
       visibleColumns() {
         return this.columns.filter(c => c.visible)
-      },
-      visibleDataset() {
-        return this.dataset.slice(this.query.offset, this.query.limit + this.query.offset)
       }
     },
   }
