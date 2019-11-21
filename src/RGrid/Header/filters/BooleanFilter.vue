@@ -26,11 +26,7 @@
       SelectedCondition: 'Equal',
       CanClose: false,
       ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen"],
-    }),
-    mounted() {
-      //eslint-disable-next-line
-      $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
-    },
+    }), 
     methods: {
       search() {
         const { query, field } = this

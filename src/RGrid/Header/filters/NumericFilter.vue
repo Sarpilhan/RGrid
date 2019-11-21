@@ -62,11 +62,7 @@
       SelectedCondition: 'Equal',
       CanClose: false,
       ConditionArray: ["Equal", "NotEqual", "GreaterThan", "LessThen", "In", "Between"],
-    }),
-    mounted() {
-      //eslint-disable-next-line
-      $(this.$el).on('hide.bs.dropdown', e => { if (!this.CanClose) e.preventDefault() });
-    },
+    }), 
     watch: { keyword(kw) { if (kw === '') this.search() } },
     methods: {
       search() {
