@@ -1,26 +1,26 @@
 {
-  "name": "rgrid",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vuejs-rgrid",
+  "version": "0.3.1",
+  "description": "VueJs DataTable",
+  "author": "Sarpilhan",
+  "license": "MIT",
+  "main": "/src/RGrid/index.js",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "description": "RGrid",
-  "author": {
-    "name": ""
-  },
   "dependencies": {
-    "axios": "^0.19.0",
-    "vue": "2.6.10"
+    "axios": "^0.19.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.0.5",
-    "@vue/cli-plugin-eslint": "4.0.5",
-    "@vue/cli-service": "4.0.5",
+    "@vue/cli-plugin-babel": "4.1.1",
+    "@vue/cli-plugin-eslint": "4.1.1",
+    "@vue/cli-service": "4.1.1",
+    "babel-eslint": "^10.0.3",
     "eslint": "6.7.1",
     "eslint-plugin-vue": "6.0.1",
+    "vue": "2.6.10",
     "vue-template-compiler": "2.6.10"
   },
   "eslintConfig": {

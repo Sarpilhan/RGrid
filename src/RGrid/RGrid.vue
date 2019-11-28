@@ -19,14 +19,26 @@
       </table>
     </div>
     <RPagination v-if="pagination" v-bind="$props" :rgridDataset="rgridDataset" :rgridTotal="rgridTotal"></RPagination>
+    <RSettings v-bind="$props"></RSettings>
   </div>
 </template>
 
 <script>
   import PropsMixin from './Utils/PropsMixin';
+  import RHeader from './Header/RHeader'
+  import RBody from './Header/RBody'
+  import RFooter from './Header/RFooter'
+  import RBodyClientSide from './Header/RBodyClientSide'
+  import RBodyServerSide from './Header/RBodyServerSide'
+  import RPagination from './Header/RPagination'
+  import RSettings from './Header/RSettings'
+
   export default {
     name: "RGrid",
     mixins: [PropsMixin],
+    components: {
+      RHeader, RBody, RFooter, RBodyServerSide, RBodyClientSide, RPagination, RSettings
+    },
     data() {
       return {
         rgridDataset: [],
