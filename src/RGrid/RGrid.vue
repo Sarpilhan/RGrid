@@ -19,7 +19,8 @@
       </table>
     </div>
     <RPagination v-if="pagination" v-bind="$props" :rgridDataset="rgridDataset" :rgridTotal="rgridTotal"></RPagination>
-    <RSettings v-bind="$props"></RSettings>
+    <RColumns v-bind="$props"></RColumns>
+    <RFilters v-bind="$props"></RFilters>
   </div>
 </template>
 
@@ -31,13 +32,14 @@
   import RBodyClientSide from './Header/RBodyClientSide'
   import RBodyServerSide from './Header/RBodyServerSide'
   import RPagination from './Header/RPagination'
-  import RSettings from './Header/RSettings'
+  import RColumns from './Header/settings/RColumns'
+  import RFilters from './Header/settings/RFilters'
 
   export default {
     name: "RGrid",
     mixins: [PropsMixin],
     components: {
-      RHeader, RBody, RFooter, RBodyServerSide, RBodyClientSide, RPagination, RSettings
+      RHeader, RBody, RFooter, RBodyServerSide, RBodyClientSide, RPagination, RColumns, RFilters
     },
     data() {
       return {

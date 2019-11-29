@@ -1,7 +1,7 @@
 <template>
   <div class="btn-group">
     <button type="button" class="btn btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @click="toggle">
-      <i :class="['fa fa-filter', { 'text-muted': !false } ]"></i>
+      <i :class="['fa fa-columns', { 'text-muted': !false } ]"></i>
     </button>
     <div class="dropdown-menu" style="position:absolute; width:auto; padding:4px 5px; border:1px solid gray">
       <button type="button" class="close" style="position:absolute; right:-10px; top:-15px;" @click="toggle">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PropsMixin from '../Utils/PropsMixin';
+import PropsMixin from '../../Utils/PropsMixin';
 export default {
   mixins: [PropsMixin],
   data() {

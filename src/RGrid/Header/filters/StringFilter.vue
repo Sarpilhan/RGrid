@@ -59,18 +59,29 @@
       CanClose: false,
       ConditionArray: ["Like", "NotLike", "Equal", "NotEqual", "In"],
     }), 
-    watch: { keyword(kw) { if (kw === '') this.search() } },
+    watch: { 
+      keyword(s) { 
+        if (s === '') 
+          this.search() 
+        },
+      'query.filter': {
+        handler(filters) {
+          if(filters.findIndex(x => x.field === this.field) === -1) 
+            this.keyword = ""
+        },
+        deep: true
+      }
+    },
     methods: {
       search() {
         const { query, field } = this
         query.offset = 0
         this.closeToogle();
-        var ItemIndex = query.filter.map(x => x.field).indexOf(field); 
-        if (ItemIndex >= 0) {
-          query.filter.splice(ItemIndex, 1); 
-          if (this.keyword === '') {  return; } 
-        }
-        query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) 
+        const index = query.filter.findIndex(x => x.field === field); 
+        if (index >= 0) 
+          query.filter.splice(index, 1); 
+        if (this.keyword !== '')
+          query.filter.push({ field: field, condition: this.SelectedCondition, keyword: this.keyword }) 
       },
       searchTag() { 
         this.keyword = this.tagList;
