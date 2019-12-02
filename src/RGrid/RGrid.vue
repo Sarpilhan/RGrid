@@ -5,7 +5,7 @@
       <table :class="['table', tableClass]" :style="tableStyle">
         <thead>
           <tr>
-            <RHeader v-for="(column, index) in visibleColumns" :key="index" :column="column" v-bind="$props" ></RHeader>
+            <RHeader v-for="(column, index) in rgridColumns" :key="index" :column="column" v-bind="$props"></RHeader>
           </tr>
         </thead>
         <RBodyServerSide v-if="serverside" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyServerSide> 
@@ -13,7 +13,7 @@
         <RBody v-else :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBody> 
         <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
-            <RFooter v-for="column in visibleColumns" :key="column.field" :summary="summary[column.field]"></RFooter>
+            <RFooter v-for="column in columns" :key="column.field" :summary="summary[column.field]"></RFooter>
           </tr>
         </tfoot>
       </table>
@@ -44,12 +44,7 @@
     data() {
       return {
         rgridDataset: [],
-        rgridTotal: 0,
-      }
-    },
-    computed: {
-      visibleColumns() {
-        return this.columns.filter(c => c.visible)
+        rgridTotal: 0
       }
     },
     created() {
