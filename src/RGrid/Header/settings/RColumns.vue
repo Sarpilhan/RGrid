@@ -7,9 +7,9 @@
       <button type="button" class="close" style="position:absolute; right:-10px; top:-15px;" @click="toggle">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div v-for="col in columns" :key="col.field" class="form-check">
+      <div v-for="col in columns" v-show="col.visible !== 'non'" :key="col.field" class="form-check">
         <input class="form-check-input" type="checkbox" :id="col.field"
-               :checked="col.visible" :disabled="col.disabled" @change="handleChange(col, $event.target.checked)"
+               :checked="isColVisible(col)" :disabled="isColDisabled(col)" @change="handleChange(col, $event.target.checked)"
         >
         <label class="small form-check-label" :for="col.field">
           {{ col.title }}  
@@ -28,20 +28,15 @@ export default {
   mixins: [PropsMixin],
   data() {
     return {
-      changes: []
+      changes: [],
     }
-  },
-  created() {
-    this.columns.filter(x => x.visible === false).forEach(col => this.$set(col, "disabled", true))
   },
   methods: {
     handleChange(col, visible) {
-      console.log(visible);
       this.changes.push({ col, visible })
     },
     apply() {
-      console.log(this.changes);
-      this.changes.forEach(({col, visible}) => {
+      this.changes.forEach(({ col, visible }) => {
         this.$set(col, "visible", visible)
       })
       this.changes = []
@@ -53,7 +48,7 @@ export default {
       } else {
         classList.add("show");
       }
-    },
+    }
   }
 }
 </script>
