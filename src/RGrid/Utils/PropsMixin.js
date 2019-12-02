@@ -11,6 +11,7 @@ export default {
     tableClass: [String, Object, Array],
     tableStyle: [String, Object, Array],
     isResponsive: { type: Boolean, required: false, default: true },
+    showToolbar: { type: Boolean, required: false, default: false },
     serverside: { type: Boolean, required: false, default: false },
     clientside: { type: Boolean, required: false, default: false },
     dataMethod: { type: Function, required: false, default: null },

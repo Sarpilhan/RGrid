@@ -48,14 +48,12 @@
     <Content Include="src\RGrid\Header\RHeader.vue" />
     <Content Include="src\RGrid\index.js" />
     <Content Include="src\RGrid\Header\RPagination.vue" />
-    <Content Include="src\RGrid\package.json" />
     <Content Include="src\RGrid\RGrid.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\RGrid\Utils\PropsMixin.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dist\" />
     <Folder Include="public\" />
     <Folder Include="src\" />
     <Folder Include="src\assets\" />

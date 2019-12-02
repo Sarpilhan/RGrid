@@ -1,26 +1,29 @@
 <template>
-  <div> 
-    <div :class="isResponsive == true ? 'table-responsive' : ''">
+  <div>
+    <div v-if="showToolbar" style="text-align:right"> 
+              <RColumns v-bind="$props"></RColumns>
+              <RFilters v-bind="$props"></RFilters>
+
+    </div>
+    <div :class="isResponsive === true ? 'table-responsive' : ''">
       <!-- LOADING (data: 'isLoading') -->
       <table :class="['table', tableClass]" :style="tableStyle">
-        <thead>
+        <thead> 
           <tr>
             <RHeader v-for="(column, index) in rgridColumns" :key="index" :column="column" v-bind="$props"></RHeader>
           </tr>
         </thead>
-        <RBodyServerSide v-if="serverside" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyServerSide> 
-        <RBodyClientSide v-else-if="clientside && dataset.length > 0" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyClientSide> 
-        <RBody v-else :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBody> 
+        <RBodyServerSide v-if="serverside" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyServerSide>
+        <RBodyClientSide v-else-if="clientside && dataset.length > 0" :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBodyClientSide>
+        <RBody v-else :rgridDataset.sync="rgridDataset" :rgridTotal.sync="rgridTotal" v-bind="$props"></RBody>
         <tfoot v-if="summary !== null && summary !== undefined">
           <tr>
             <RFooter v-for="column in columns" :key="column.field" :summary="summary[column.field]"></RFooter>
           </tr>
         </tfoot>
       </table>
-    </div>
+    </div> 
     <RPagination v-if="pagination" v-bind="$props" :rgridDataset="rgridDataset" :rgridTotal="rgridTotal"></RPagination>
-    <RColumns v-bind="$props"></RColumns>
-    <RFilters v-bind="$props"></RFilters>
   </div>
 </template>
 
