@@ -1,0 +1,9 @@
+bin
+build
+dist
+node_modules
+obj
+public
+.git
+.vscode
+*.njsproj
