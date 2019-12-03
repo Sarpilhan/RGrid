@@ -46,6 +46,8 @@
     <Content Include="src\RGrid\Header\RBody.vue" />
     <Content Include="src\RGrid\Header\RBodyClientSide.vue" />
     <Content Include="src\RGrid\Header\RHeader.vue" />
+    <Content Include="src\RGrid\Header\settings\RColumns.vue" />
+    <Content Include="src\RGrid\Header\settings\RFilters.vue" />
     <Content Include="src\RGrid\index.js" />
     <Content Include="src\RGrid\Header\RPagination.vue" />
     <Content Include="src\RGrid\RGrid.vue">
@@ -61,6 +63,7 @@
     <Folder Include="src\RGrid\" />
     <Folder Include="src\RGrid\Header\" />
     <Folder Include="src\RGrid\Header\filters\" />
+    <Folder Include="src\RGrid\Header\settings\" />
     <Folder Include="src\RGrid\Utils\" />
   </ItemGroup>
   <ItemGroup>
