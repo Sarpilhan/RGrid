@@ -25,15 +25,6 @@
       rgridDataset: { type: Array, required: false, default: () => [] },
       rgridTotal: { type: Number, required: false, default: 0 },
     },
-    watch: {
-      dataset: {
-        handler() {
-          this.$emit("update:rgridDataset", this.dataset)
-          this.$emit("update:rgridTotal", this.total)
-        },
-        deep: true
-      }
-    },
     computed: {
       visibleColumns() {
         return this.columns.filter(c => c.visible)

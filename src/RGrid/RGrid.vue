@@ -5,7 +5,7 @@
               <RFilters v-bind="$props"></RFilters>
 
     </div>
-    <div :class="isResponsive === true ? 'table-responsive' : ''">
+    <div :class="{ 'table-reponsive' : isResponsive, 'table-scroll' : height }" :style="[height ? {'height': `${height}px`} : {}]">
       <!-- LOADING (data: 'isLoading') -->
       <table :class="['table', tableClass]" :style="tableStyle">
         <thead> 
@@ -50,6 +50,15 @@
         rgridTotal: 0
       }
     },
+    watch: {
+      dataset: {
+        handler() {
+          this.rgridDataset = this.dataset
+          this.rgridTotal = this.total
+        },
+        deep: true
+      }
+    },
     created() {
       const q = { limit: this.pageSize[0], offset: 0, sort: [], filter: [], ...this.query }
       Object.keys(q).forEach(key => { this.$set(this.query, key, q[key]) })
@@ -61,3 +70,21 @@
     }
   }
 </script>
+
+<style>
+  .table-scroll { 
+    overflow-y: auto;
+  }
+  .table-scroll th { 
+    position: sticky; 
+    top: -1px;
+  }
+  table  { 
+    border-collapse: collapse; 
+    width: 100%;
+    margin-bottom: 3px !important;
+  }
+  th { 
+    background:#eee;
+  }
+</style>

@@ -51,6 +51,12 @@
           this.$emit("update:rgridTotal", this.clientSideDataset.length)
         },
         deep: true
+      },
+      rgridDataset: {
+        handler() {
+          this.clientSideDataset = this.rgridDataset
+          this.rgridTotal = this.clientSideDataset.length
+        }
       }
     },
     methods: {

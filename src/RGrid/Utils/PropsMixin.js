@@ -10,6 +10,7 @@ export default {
     xprops: { type: Object, required: false, default: () => ({}) },
     tableClass: [String, Object, Array],
     tableStyle: [String, Object, Array],
+    height: { type: [Number, String], required: false, default: 0 },
     isResponsive: { type: Boolean, required: false, default: true },
     showToolbar: { type: Boolean, required: false, default: false },
     serverside: { type: Boolean, required: false, default: false },
