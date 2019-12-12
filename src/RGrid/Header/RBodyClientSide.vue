@@ -22,8 +22,8 @@
     name: "RBodyClientSide", 
     mixins: [props],
     props: {
-      rgridDataset: { type: Array, required: false, default: () => [...this.dataset] },
-      rgridTotal: { type: Number, required: false, default: () => this.total },
+      rgridDataset: { type: Array, required: false, default: function() { return [...this.dataset] } },
+      rgridTotal: { type: Number, required: false, default: function() { return this.dataset.length } },
     },
     created() {
       this.$emit("update:rgridTotal", this.clientSideDataset.length)
