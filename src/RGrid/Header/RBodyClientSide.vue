@@ -55,7 +55,7 @@
       rgridDataset: {
         handler() {
           this.clientSideDataset = this.rgridDataset
-          this.rgridTotal = this.clientSideDataset.length
+          this.$emit("update:rgridTotal", this.clientSideDataset.length)
         }
       }
     },

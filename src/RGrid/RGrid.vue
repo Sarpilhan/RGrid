@@ -82,7 +82,7 @@
   table  { 
     border-collapse: collapse; 
     width: 100%;
-    margin-bottom: 3px !important;
+    margin-bottom: 5px !important;
   }
   th { 
     background:#eee;
