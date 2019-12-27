@@ -59,7 +59,7 @@
           query.filter.splice(ItemIndex, 1); 
           if (this.keyword === '') {  return; } 
         }
-        query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ?   this.keywordStart + ";"   : "")  + this.keyword })
+        query.filter.push({ field: field, condition: this.SelectedCondition, keyword: (this.SelectedCondition === 'Between' ? new Date(this.keywordStart).toJSON() + ";" : "") + new Date(this.keyword).toJSON() })
       },
       closeToogle() {
         this.CanClose = true;
