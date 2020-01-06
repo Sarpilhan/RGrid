@@ -4,6 +4,7 @@ dist
 node_modules
 obj
 public
+src/components
 .git
 .vscode
 *.njsproj
